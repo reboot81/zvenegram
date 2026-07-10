@@ -17,6 +17,11 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, nodesById, a
   const dragging = useRef(false)
   const dragMoved = useRef(false)
   const dragStartNode = useRef<string | null>(null)
+  const endDrag = () => {
+    dragging.current = false
+    dragMoved.current = false
+    dragStartNode.current = null
+  }
   const handleMove = (event: PointerEvent) => {
     if (!dragging.current) return
     const element = document.elementFromPoint(event.clientX, event.clientY)?.closest<HTMLElement>('[data-node-id]')
@@ -27,9 +32,9 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, nodesById, a
   }
 
   return <div className="board" onPointerMove={handleMove} onPointerUp={() => {
-    dragging.current = false
     if (dragMoved.current) submitSelection()
-  }} onPointerCancel={() => { dragging.current = false; setSelection([]) }}>
+    endDrag()
+  }} onPointerCancel={() => { setSelection([]); endDrag() }} onLostPointerCapture={endDrag}>
     <svg className="connections" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       {edges.map(([from, to]) => {
         const a = nodesById.get(from)!
