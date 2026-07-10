@@ -81,6 +81,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
 
   const addNode = useCallback((id: string) => {
     if (!activeNodeIds.has(id) || finished) return
+    setRecentSolvedPath([])
     setStarted(true)
     setSelection((current) => extendSelection(current, id, visibleEdges))
   }, [activeNodeIds, finished, visibleEdges])
