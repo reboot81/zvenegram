@@ -19,6 +19,7 @@ export type Puzzle = {
   layout?: string[]
   edges?: [string, string][]
   words: PuzzleWord[]
+  bonusWords?: PuzzleWord[]
 }
 
 export type GameStats = {

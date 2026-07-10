@@ -90,6 +90,10 @@ h2 { font-size: 32px; }
 .selection-area p { margin: 5px 0 8px; color: var(--muted); font-size: 13px; }
 .selection-area p.success { color: var(--green); font-weight: 700; }
 .found-words { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin: 10px 0 24px; }
+.bonus-words { margin: -10px 0 24px; text-align: center; color: var(--muted); font-size: 12px; }
+.bonus-words > span { display: block; margin-bottom: 6px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.bonus-words div { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
+.bonus-words b { padding: 5px 8px; border-radius: 999px; color: var(--green); background: rgba(39, 104, 70, .1); font-size: 12px; }
 .found-words span { padding: 6px 10px; border-radius: 99px; color: var(--muted); background: #eeeee8; font-size: 11px; }
 .found-words span.found { color: var(--green); background: #dceadd; font-weight: 700; }
 .reset { display: flex; align-items: center; gap: 7px; margin: auto; border: 0; color: var(--muted); background: none; cursor: pointer; font-size: 12px; }

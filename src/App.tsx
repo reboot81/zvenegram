@@ -151,6 +151,7 @@ function App() {
       <div className="found-words">{game.puzzle.words.map(({ word }) => <span key={word} className={game.solved.includes(word) ? 'found' : ''}>
         {game.solved.includes(word) ? word : `${word.length} bokstäver`}
       </span>)}</div>
+      {game.bonusSolved.length > 0 && <div className="bonus-words"><span>Bonusord</span><div>{game.bonusSolved.map((word) => <b key={word}>{word}</b>)}</div></div>}
       <button className="reset" onClick={() => game.reset()}><RotateCcw size={16} /> Börja om</button>
     </section>
 
@@ -180,7 +181,7 @@ function App() {
         <p className="eyebrow">Så spelar du Svanagram</p>
         <h2>Hitta orden i brädet</h2>
         <div className="tutorial-copy">
-          <p>Dra eller klicka dig genom bokstäverna för att bygga ett ord. Alla ord har minst 4 bokstäver.</p>
+          <p>Dra eller klicka dig genom bokstäverna för att bygga ett ord. Alla ord har minst 4 bokstäver. Andra giltiga ord blir bonusord.</p>
         </div>
         <button className="primary" onClick={dismissTutorial}>Börja spela</button>
       </section>

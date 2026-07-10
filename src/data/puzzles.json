@@ -29,6 +29,18 @@
       { "word": "SOLA", "path": ["s1", "o1", "l1", "a1"] },
       { "word": "RENA", "path": ["r1", "e1", "n1", "a2"] },
       { "word": "FISKA", "path": ["f1", "i1", "s2", "k1", "a2"] }
+    ],
+    "bonusWords": [
+      { "word": "ORDEN", "path": ["o1", "r1", "d1", "e1", "n1"] },
+      { "word": "OREN", "path": ["o1", "r1", "e1", "n1"] },
+      { "word": "ORENA", "path": ["o1", "r1", "e1", "n1", "a2"] },
+      { "word": "LORD", "path": ["l1", "o1", "r1", "d1"] },
+      { "word": "LATA", "path": ["l1", "a1", "t1", "a2"] },
+      { "word": "RENAT", "path": ["r1", "e1", "n1", "a2", "t1"] },
+      { "word": "BORD", "path": ["b1", "o1", "r1", "d1"] },
+      { "word": "EROS", "path": ["e1", "r1", "o1", "s1"] },
+      { "word": "FISK", "path": ["f1", "i1", "s2", "k1"] },
+      { "word": "SKATA", "path": ["s2", "k1", "a2", "t1", "a1"] }
     ]
   },
   {
@@ -61,6 +73,14 @@
       { "word": "SENA", "path": ["s2", "e", "n", "a"] },
       { "word": "MENA", "path": ["m", "e", "n", "a"] },
       { "word": "FENA", "path": ["f", "e", "n", "a"] }
+    ],
+    "bonusWords": [
+      { "word": "SKEN", "path": ["s", "k", "e", "n"] },
+      { "word": "SKENA", "path": ["s", "k", "e", "n", "a"] },
+      { "word": "RÄCK", "path": ["r", "ä", "c", "k"] },
+      { "word": "RÄCKE", "path": ["r", "ä", "c", "k", "e"] },
+      { "word": "DÄCK", "path": ["d", "ä", "c", "k"] },
+      { "word": "BÄCK", "path": ["b", "ä", "c", "k"] }
     ]
   }
 ]

@@ -5,6 +5,7 @@ import type { Puzzle } from '../types'
 export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) {
   const [puzzleIndex, setPuzzleIndex] = useState(0)
   const [solved, setSolved] = useState<string[]>([])
+  const [bonusSolved, setBonusSolved] = useState<string[]>([])
   const [selection, setSelection] = useState<string[]>([])
   const [seconds, setSeconds] = useState(0)
   const [started, setStarted] = useState(false)
@@ -48,7 +49,15 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
   const submitSelection = useCallback(() => {
     if (!selection.length) return
     const match = findMatchingWord(remainingWords, selection)
+    const bonusMatch = match ? undefined : findMatchingWord(puzzle.bonusWords ?? [], selection)
     if (!match) {
+      if (bonusMatch) {
+        setRecentSolvedPath(bonusMatch.path)
+        setSelection([])
+        setBonusSolved((current) => current.includes(bonusMatch.word) ? current : [...current, bonusMatch.word])
+        setMessage(bonusSolved.includes(bonusMatch.word) ? `${bonusMatch.word} hittat tidigare` : `Bonusord: ${bonusMatch.word}!`)
+        return
+      }
       setSelection([])
       if (selection.length >= 4) setMessage('Inte ett av orden – prova igen')
       else setMessage('')
@@ -70,11 +79,11 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
         onFinish(seconds)
       }, 2000)
     }
-  }, [longestLength, onFinish, puzzle.words.length, remainingWords, seconds, selection, solved])
+  }, [bonusSolved, longestLength, onFinish, puzzle.bonusWords, puzzle.words.length, remainingWords, seconds, selection, solved])
 
   useEffect(() => {
-    if (findMatchingWord(remainingWords, selection)) submitSelection()
-  }, [remainingWords, selection, submitSelection])
+    if (findMatchingWord(remainingWords, selection) || findMatchingWord(puzzle.bonusWords ?? [], selection)) submitSelection()
+  }, [puzzle.bonusWords, remainingWords, selection, submitSelection])
 
   const addNode = useCallback((id: string) => {
     if (!activeNodeIds.has(id) || finished) return
@@ -85,13 +94,13 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
 
   const reset = useCallback((index = puzzleIndex) => {
     setPuzzleIndex(index)
-    setSolved([]); setSelection([]); setSeconds(0); setStarted(false); setFinished(false); setShowFinishScreen(false)
+    setSolved([]); setBonusSolved([]); setSelection([]); setSeconds(0); setStarted(false); setFinished(false); setShowFinishScreen(false)
     setRecentSolvedPath([])
     setFeaturedWord(null); setMessage('')
   }, [puzzleIndex])
 
   return {
-    puzzle, puzzleIndex, solved, selection, seconds, finished, showFinishScreen, featuredWord, message,
+    puzzle, puzzleIndex, solved, bonusSolved, selection, seconds, finished, showFinishScreen, featuredWord, message,
     recentSolvedPath,
     activeNodeIds, visibleEdges, gridNodes, nodesById, selectionWord,
     addNode, submitSelection, setSelection, reset,
