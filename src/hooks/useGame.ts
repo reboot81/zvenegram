@@ -40,7 +40,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
 
   useEffect(() => {
     if (!recentSolvedPath.length) return
-    const timeout = window.setTimeout(() => setRecentSolvedPath([]), 1500)
+    const timeout = window.setTimeout(() => setRecentSolvedPath([]), 2000)
     return () => window.clearTimeout(timeout)
   }, [recentSolvedPath])
 
