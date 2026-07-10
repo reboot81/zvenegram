@@ -44,6 +44,10 @@ Ett fullständigt ord får inte ingå i ett annat längre ord. Kombinationer som
 
 Webbläsarens `localStorage` används för statistik. Ingen speldata skickas till en server.
 
+## Genererade pussel
+
+`src/data/generated-puzzles.json` kommer från projektet `zvenegram-dictionary`. Generatorn använder en public-domain-baserad svensk ordlista och svensk frekvensdata från FrequencyWords (CC BY-SA 4.0). Se ordlisteprojektets `SOURCES.md` för attribution och villkor.
+
 ## Arkitektur
 
 - `src/engine/` innehåller den rena spel- och pussellogiken utan React eller webbläsarberoenden.

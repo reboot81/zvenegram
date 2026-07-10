@@ -2,11 +2,12 @@ import { useCallback, useState } from 'react'
 import { BarChart3, RotateCcw, Sparkles, X } from 'lucide-react'
 import { GameBoard } from './components/GameBoard'
 import puzzleData from './data/puzzles.json'
+import generatedPuzzleData from './data/generated-puzzles.json'
 import { validatePuzzles } from './engine/puzzle'
 import { useGame } from './hooks/useGame'
 import type { GameStats, Puzzle } from './types'
 
-const puzzles = validatePuzzles(puzzleData as Puzzle[])
+const puzzles = validatePuzzles([...puzzleData, ...generatedPuzzleData] as Puzzle[])
 const emptyStats: GameStats = { gamesPlayed: 0, gamesSolved: 0, bestTime: null, totalTime: 0 }
 
 function formatTime(seconds: number) {
