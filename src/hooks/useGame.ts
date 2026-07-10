@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRef } from 'react'
 import { extendSelection, findMatchingWord, getBoardEdges, getGridNodes } from '../engine/puzzle'
 import type { Puzzle } from '../types'
 
@@ -11,6 +12,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
   const [finished, setFinished] = useState(false)
   const [featuredWord, setFeaturedWord] = useState<string | null>(null)
   const [message, setMessage] = useState('')
+  const solvedCount = useRef(0)
   const puzzle = puzzles[puzzleIndex]
   const longestLength = Math.max(...puzzle.words.map(({ word }) => [...word].length))
   const remainingWords = useMemo(() => puzzle.words.filter(({ word }) => !solved.includes(word)), [puzzle, solved])
@@ -36,6 +38,12 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
     const timeout = window.setTimeout(() => setFeaturedWord(null), 4000)
     return () => window.clearTimeout(timeout)
   }, [featuredWord])
+
+  useEffect(() => {
+    if (solved.length === solvedCount.current) return
+    solvedCount.current = solved.length
+    setSelection([])
+  }, [solved])
 
   const submitSelection = useCallback(() => {
     if (!selection.length) return
