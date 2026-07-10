@@ -39,7 +39,6 @@ function App() {
   const game = useGame(puzzles, recordFinish)
 
   useEffect(() => {
-    if (!import.meta.env.DEV) return
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key.toLowerCase() !== 'd' || event.repeat || event.metaKey || event.ctrlKey || event.altKey) return
       setShowDebug((current) => !current)
@@ -89,7 +88,7 @@ function App() {
       <button className="reset" onClick={() => game.reset()}><RotateCcw size={16} /> Börja om</button>
     </section>
 
-    {import.meta.env.DEV && showDebug && <aside className="debug-words"><span>Debug · ord i pusslet</span><div>
+    {showDebug && <aside className="debug-words"><span>Debug · ord i pusslet</span><div>
       {game.puzzle.words.map(({ word }) => <code key={word} className={game.solved.includes(word) ? 'solved' : ''}>{word}</code>)}
     </div></aside>}
 
