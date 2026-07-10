@@ -19,7 +19,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
     if (remainingWords.length && ids.size === 0) return new Set(puzzle.nodes.map(({ id }) => id))
     return ids
   }, [puzzle.nodes, remainingWords])
-  const boardEdges = useMemo(() => getBoardEdges(puzzle), [puzzle])
+  const boardEdges = useMemo(() => getBoardEdges({ ...puzzle, words: remainingWords }), [puzzle, remainingWords])
   const visibleEdges = useMemo(() => boardEdges.filter(([a, b]) => activeNodeIds.has(a) && activeNodeIds.has(b)), [activeNodeIds, boardEdges])
   const gridNodes = useMemo(() => getGridNodes(puzzle), [puzzle])
   const nodesById = useMemo(() => new Map(gridNodes.map((node) => [node.id, node])), [gridNodes])
