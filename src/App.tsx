@@ -11,6 +11,14 @@ puzzles.forEach((puzzle) => {
   if (puzzle.words.some(({ word }) => [...word].length < 4)) {
     throw new Error(`Puzzle ${puzzle.id} contains a word shorter than four letters`)
   }
+  puzzle.words.forEach(({ word }, index) => {
+    puzzle.words.slice(index + 1).forEach(({ word: otherWord }) => {
+      const [shorter, longer] = word.length <= otherWord.length ? [word, otherWord] : [otherWord, word]
+      if (longer.includes(shorter)) {
+        throw new Error(`Puzzle ${puzzle.id} contains overlapping words: ${shorter} and ${longer}`)
+      }
+    })
+  })
   const order = puzzle.layout ?? puzzle.nodes.map(({ id }) => id)
   if (order.length !== 16 || new Set(order).size !== 16) {
     throw new Error(`Puzzle ${puzzle.id} must have 16 unique layout positions`)

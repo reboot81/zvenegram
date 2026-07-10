@@ -27,10 +27,8 @@
       { "word": "BORDEN", "path": ["b1", "o1", "r1", "d1", "e1", "n1"] },
       { "word": "MATA", "path": ["m1", "a1", "t1", "a2"] },
       { "word": "SOLA", "path": ["s1", "o1", "l1", "a1"] },
-      { "word": "BORD", "path": ["b1", "o1", "r1", "d1"] },
       { "word": "RENA", "path": ["r1", "e1", "n1", "a2"] },
-      { "word": "FISKA", "path": ["f1", "i1", "s2", "k1", "a2"] },
-      { "word": "FISK", "path": ["f1", "i1", "s2", "k1"] }
+      { "word": "FISKA", "path": ["f1", "i1", "s2", "k1", "a2"] }
     ]
   },
   {
@@ -60,7 +58,6 @@
       { "word": "BÄCKEN", "path": ["b", "ä", "c", "k", "e", "n"] },
       { "word": "SKOG", "path": ["s", "k", "o", "g"] },
       { "word": "TRÄD", "path": ["t", "r", "ä", "d"] },
-      { "word": "BÄCK", "path": ["b", "ä", "c", "k"] },
       { "word": "SENA", "path": ["s2", "e", "n", "a"] },
       { "word": "MENA", "path": ["m", "e", "n", "a"] },
       { "word": "FENA", "path": ["f", "e", "n", "a"] }

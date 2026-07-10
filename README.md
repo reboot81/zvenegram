@@ -40,4 +40,6 @@ Spelplanens linjer kan anges separat med `edges`, exempelvis `[["a1", "b1"], ["b
 
 Alla ord måste ingå i ett sammanhängande ordnät. Varje ord ska dela minst en bokstavscirkel med ett annat ord, direkt eller genom en kedja av överlappande ord. Fristående ordgrupper stoppas av den automatiska pusselvalideringen.
 
+Ett fullständigt ord får inte ingå i ett annat längre ord. Kombinationer som `BÄCK`/`BÄCKEN`, `BORD`/`MATBORD` och `FISK`/`FISKA` stoppas automatiskt. Orden får fortfarande dela enskilda bokstäver och delar av sina vägar för att bilda ett sammanhängande pussel.
+
 Webbläsarens `localStorage` används för statistik. Ingen speldata skickas till en server.
