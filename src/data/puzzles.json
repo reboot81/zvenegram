@@ -1,0 +1,69 @@
+[
+  {
+    "id": "sommarbordet",
+    "title": "Sommarbordet",
+    "difficulty": "Lätt",
+    "layout": ["l1", "o1", "r1", "d1", "s1", "a1", "b1", "e1", "m1", "s2", "t1", "n1", "f1", "i1", "k1", "a2"],
+    "nodes": [
+      { "id": "m1", "letter": "M", "x": 12, "y": 16 },
+      { "id": "a1", "letter": "A", "x": 37, "y": 16 },
+      { "id": "t1", "letter": "T", "x": 62, "y": 16 },
+      { "id": "a2", "letter": "A", "x": 87, "y": 16 },
+      { "id": "s1", "letter": "S", "x": 12, "y": 49 },
+      { "id": "o1", "letter": "O", "x": 37, "y": 49 },
+      { "id": "l1", "letter": "L", "x": 62, "y": 49 },
+      { "id": "r1", "letter": "R", "x": 87, "y": 49 },
+      { "id": "b1", "letter": "B", "x": 12, "y": 82 },
+      { "id": "d1", "letter": "D", "x": 37, "y": 82 },
+      { "id": "e1", "letter": "E", "x": 62, "y": 82 },
+      { "id": "n1", "letter": "N", "x": 87, "y": 82 },
+      { "id": "f1", "letter": "F", "x": 12, "y": 96 },
+      { "id": "i1", "letter": "I", "x": 37, "y": 96 },
+      { "id": "s2", "letter": "S", "x": 62, "y": 96 },
+      { "id": "k1", "letter": "K", "x": 87, "y": 96 }
+    ],
+    "words": [
+      { "word": "MATBORD", "path": ["m1", "a1", "t1", "b1", "o1", "r1", "d1"] },
+      { "word": "BORDEN", "path": ["b1", "o1", "r1", "d1", "e1", "n1"] },
+      { "word": "MATA", "path": ["m1", "a1", "t1", "a2"] },
+      { "word": "SOLA", "path": ["s1", "o1", "l1", "a1"] },
+      { "word": "BORD", "path": ["b1", "o1", "r1", "d1"] },
+      { "word": "RENA", "path": ["r1", "e1", "n1", "a2"] },
+      { "word": "FISKA", "path": ["f1", "i1", "s2", "k1", "a2"] },
+      { "word": "FISK", "path": ["f1", "i1", "s2", "k1"] }
+    ]
+  },
+  {
+    "id": "skogsstigen",
+    "title": "Skogsstigen",
+    "difficulty": "Medel",
+    "layout": ["f", "a", "s2", "s", "n", "e", "k", "o", "m", "ä", "c", "g", "b", "d", "r", "t"],
+    "nodes": [
+      { "id": "s", "letter": "S", "x": 15, "y": 18 },
+      { "id": "k", "letter": "K", "x": 39, "y": 18 },
+      { "id": "o", "letter": "O", "x": 63, "y": 18 },
+      { "id": "g", "letter": "G", "x": 87, "y": 18 },
+      { "id": "t", "letter": "T", "x": 15, "y": 51 },
+      { "id": "r", "letter": "R", "x": 39, "y": 51 },
+      { "id": "ä", "letter": "Ä", "x": 63, "y": 51 },
+      { "id": "d", "letter": "D", "x": 87, "y": 51 },
+      { "id": "b", "letter": "B", "x": 15, "y": 84 },
+      { "id": "a", "letter": "A", "x": 39, "y": 84 },
+      { "id": "c", "letter": "C", "x": 63, "y": 84 },
+      { "id": "e", "letter": "E", "x": 76, "y": 84 },
+      { "id": "n", "letter": "N", "x": 91, "y": 84 },
+      { "id": "m", "letter": "M", "x": 15, "y": 96 },
+      { "id": "s2", "letter": "S", "x": 39, "y": 96 },
+      { "id": "f", "letter": "F", "x": 63, "y": 96 }
+    ],
+    "words": [
+      { "word": "BÄCKEN", "path": ["b", "ä", "c", "k", "e", "n"] },
+      { "word": "SKOG", "path": ["s", "k", "o", "g"] },
+      { "word": "TRÄD", "path": ["t", "r", "ä", "d"] },
+      { "word": "BÄCK", "path": ["b", "ä", "c", "k"] },
+      { "word": "SENA", "path": ["s2", "e", "n", "a"] },
+      { "word": "MENA", "path": ["m", "e", "n", "a"] },
+      { "word": "FENA", "path": ["f", "e", "n", "a"] }
+    ]
+  }
+]
