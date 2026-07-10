@@ -88,6 +88,7 @@ function App() {
         <div><strong>{stats.bestTime === null ? '–' : formatTime(stats.bestTime)}</strong><span>Bästa tid</span></div>
         <div><strong>{stats.gamesSolved ? formatTime(Math.round(stats.totalTime / stats.gamesSolved)) : '–'}</strong><span>Snittid</span></div></div>
     </section></div>}
+    <footer className="app-footer">Zvenegram · version 1.0.0</footer>
   </main>
 }
 
