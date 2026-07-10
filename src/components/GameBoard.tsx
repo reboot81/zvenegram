@@ -7,13 +7,14 @@ type Props = {
   edges: Edge[]
   activeNodeIds: Set<string>
   selection: string[]
+  recentSolvedPath: string[]
   nodesById: Map<string, GridNode>
   addNode: (id: string) => void
   submitSelection: () => void
   setSelection: Dispatch<SetStateAction<string[]>>
 }
 
-export function GameBoard({ nodes, edges, activeNodeIds, selection, nodesById, addNode, submitSelection, setSelection }: Props) {
+export function GameBoard({ nodes, edges, activeNodeIds, selection, recentSolvedPath, nodesById, addNode, submitSelection, setSelection }: Props) {
   const dragging = useRef(false)
   const dragMoved = useRef(false)
   const dragStartNode = useRef<string | null>(null)
@@ -49,8 +50,9 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, nodesById, a
     {nodes.map((node) => {
       const active = activeNodeIds.has(node.id)
       const selectedIndex = selection.indexOf(node.id)
+      const recentlySolved = recentSolvedPath.includes(node.id)
       return <button key={node.id} data-node-id={node.id} disabled={!active}
-        className={`letter-node ${active ? '' : 'gone'} ${selectedIndex >= 0 ? 'selected' : ''}`}
+        className={`letter-node ${active ? '' : 'gone'} ${selectedIndex >= 0 ? 'selected' : ''} ${recentlySolved ? 'recently-solved' : ''}`}
         style={{ left: `${node.x}%`, top: `${node.y}%` }} aria-label={`Bokstaven ${node.letter}`}
         onPointerDown={(event) => {
           event.preventDefault()

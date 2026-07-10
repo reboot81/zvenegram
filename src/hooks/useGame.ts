@@ -11,6 +11,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
   const [finished, setFinished] = useState(false)
   const [featuredWord, setFeaturedWord] = useState<string | null>(null)
   const [message, setMessage] = useState('')
+  const [recentSolvedPath, setRecentSolvedPath] = useState<string[]>([])
   const puzzle = puzzles[puzzleIndex]
   const longestLength = Math.max(...puzzle.words.map(({ word }) => [...word].length))
   const remainingWords = useMemo(() => puzzle.words.filter(({ word }) => !solved.includes(word)), [puzzle, solved])
@@ -37,6 +38,12 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
     return () => window.clearTimeout(timeout)
   }, [featuredWord])
 
+  useEffect(() => {
+    if (!recentSolvedPath.length) return
+    const timeout = window.setTimeout(() => setRecentSolvedPath([]), 1500)
+    return () => window.clearTimeout(timeout)
+  }, [recentSolvedPath])
+
   useLayoutEffect(() => {
     setSelection([])
   }, [solved.length])
@@ -49,6 +56,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
       setSelection([])
       return
     }
+    setRecentSolvedPath(match.path)
     const nextSolved = [...solved, match.word]
     setSolved(nextSolved)
     if ([...match.word].length === longestLength) {
@@ -80,6 +88,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
 
   return {
     puzzle, puzzleIndex, solved, selection, seconds, finished, featuredWord, message,
+    recentSolvedPath,
     activeNodeIds, visibleEdges, gridNodes, nodesById, selectionWord,
     addNode, submitSelection, setSelection, reset,
   }

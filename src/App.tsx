@@ -72,7 +72,7 @@ function App() {
       </div>
 
       <GameBoard nodes={game.gridNodes} edges={game.visibleEdges} activeNodeIds={game.activeNodeIds}
-        selection={game.selection} nodesById={game.nodesById} addNode={game.addNode}
+        selection={game.selection} recentSolvedPath={game.recentSolvedPath} nodesById={game.nodesById} addNode={game.addNode}
         submitSelection={game.submitSelection} setSelection={game.setSelection} />
 
       {game.featuredWord && <div className="longest-reveal" role="status" aria-live="assertive">
