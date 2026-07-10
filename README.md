@@ -48,6 +48,14 @@ Webbläsarens `localStorage` används för statistik. Ingen speldata skickas til
 
 `src/data/generated-puzzles.json` kommer från projektet `zvenegram-dictionary`. Generatorn använder en public-domain-baserad svensk ordlista och svensk frekvensdata från FrequencyWords (CC BY-SA 4.0). Se ordlisteprojektets `SOURCES.md` för attribution och villkor.
 
+För att uppdatera spelets genererade pussel lokalt kan du köra:
+
+```bash
+npm run sync:puzzles
+```
+
+Det kopierar standardutdata från det närliggande `zvenegram-dictionary`-projektet till `src/data/generated-puzzles.json`. Om du vill peka på en annan källa kan du ange `--source=...` och `--output=...` till skriptet.
+
 ## Arkitektur
 
 - `src/engine/` innehåller den rena spel- och pussellogiken utan React eller webbläsarberoenden.
