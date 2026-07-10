@@ -18,6 +18,15 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, recentSolved
   const dragging = useRef(false)
   const dragMoved = useRef(false)
   const dragStartNode = useRef<string | null>(null)
+  const recentSolvedEdges = recentSolvedPath.length > 1
+    ? recentSolvedPath.slice(1).map((id, index) => [recentSolvedPath[index], id] as const)
+    : []
+  const renderedEdges = [...edges]
+  recentSolvedEdges.forEach((edge) => {
+    if (!renderedEdges.some(([from, to]) => (from === edge[0] && to === edge[1]) || (from === edge[1] && to === edge[0]))) {
+      renderedEdges.push([...edge])
+    }
+  })
   const endDrag = () => {
     dragging.current = false
     dragMoved.current = false
@@ -40,11 +49,12 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, recentSolved
     endDrag()
   }} onPointerCancel={() => { setSelection([]); endDrag() }} onLostPointerCapture={endDrag}>
     <svg className="connections" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      {edges.map(([from, to]) => {
+      {renderedEdges.map(([from, to]) => {
         const a = nodesById.get(from)!
         const b = nodesById.get(to)!
         const selected = selection.some((id, i) => (id === from && selection[i + 1] === to) || (id === to && selection[i + 1] === from))
-        return <path key={`${from}-${to}`} d={`M ${a.x} ${a.y} L ${b.x} ${b.y}`} className={selected ? 'selected-line' : ''} />
+        const recentlySolved = recentSolvedEdges.some(([x, y]) => (x === from && y === to) || (x === to && y === from))
+        return <path key={`${from}-${to}`} d={`M ${a.x} ${a.y} L ${b.x} ${b.y}`} className={`${selected ? 'selected-line' : ''} ${recentlySolved ? 'recently-solved-line' : ''}`} />
       })}
     </svg>
     {nodes.map((node) => {

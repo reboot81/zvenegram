@@ -30,6 +30,7 @@ button { font: inherit; }
 }
 
 .topbar { max-width: 680px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: space-between; }
+.topbar-actions { display: flex; align-items: center; gap: 2px; }
 .brand { font-size: 14px; font-weight: 700; letter-spacing: .18em; }
 .brand span { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: 8px; border-radius: 50%; color: white; background: var(--accent); font-family: 'Fraunces', serif; font-size: 19px; letter-spacing: 0; }
 .icon-button, .modal-close { border: 0; background: transparent; color: var(--ink); cursor: pointer; padding: 8px; }
@@ -65,6 +66,7 @@ h2 { font-size: 32px; }
 .connections { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .connections path { fill: none; stroke: var(--line); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: opacity .3s; }
 .connections .selected-line { stroke: var(--accent); stroke-width: 9; }
+.connections .recently-solved-line { stroke: var(--green); stroke-width: 7; }
 .letter-node { position: absolute; z-index: 2; width: clamp(46px, 12vw, 58px); height: clamp(46px, 12vw, 58px); transform: translate(-50%, -50%); border: 2px solid #315843; border-radius: 50%; color: var(--ink); background: var(--paper); font-size: clamp(20px, 5vw, 25px); font-weight: 700; cursor: pointer; transition: opacity .28s, transform .28s, background .15s, color .15s; }
 .letter-node.selected { color: white; background: var(--accent); border-color: var(--accent); transform: translate(-50%, -54%) scale(1.05); }
 .letter-node.recently-solved { color: white; background: var(--green); border-color: var(--green); box-shadow: 0 0 0 8px rgba(39, 104, 70, .12); }
@@ -106,6 +108,18 @@ h2 { font-size: 32px; }
 .tutorial-copy { display: grid; gap: 12px; margin: 22px 0 28px; color: var(--muted); font-size: 14px; line-height: 1.55; }
 .tutorial-copy p { margin: 0; }
 .tutorial-copy kbd { padding: 2px 6px; border: 1px solid rgba(44, 67, 52, .18); border-bottom-width: 2px; border-radius: 6px; color: var(--ink); background: #f4f2ea; font: inherit; font-size: 12px; }
+.theme-dark { color-scheme: dark; }
+.theme-dark { --ink: #eef3eb; --muted: #9da9a0; --paper: #1a211c; --line: #536057; --accent-soft: #46271e; --shadow: 0 24px 80px rgba(0,0,0,.3); }
+.theme-dark .app-shell { background: radial-gradient(circle at 20% 10%, rgba(51,75,58,.26), transparent 28rem), #111512; }
+.theme-dark .game-card { border-color: #2c372f; }
+.theme-dark .progress, .theme-dark .found-words span, .theme-dark .stat-grid div { background: #293029; }
+.theme-dark .letter-node { border-color: #7f9b88; }
+.theme-dark .longest-reveal { color: #ffe6a5; border-color: #8a681e; background: linear-gradient(135deg, #493817, #352a16); }
+.theme-dark .finish-longest { color: #ffc96d; }
+.theme-dark .debug-words { color: #c9bd8d; border-color: #625b3d; background: rgba(47, 43, 28, .72); }
+.theme-dark .debug-words code { color: #e4d8a7; background: rgba(255,255,255,.06); }
+.theme-dark .tutorial-copy { color: #cfc7b9; }
+.theme-dark .tutorial-copy kbd { color: #f2efe7; border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.08); }
 .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 28px; }
 .stat-grid div { padding: 16px 5px; border-radius: 14px; text-align: center; background: #eeeee8; }
 .stat-grid strong, .stat-grid span { display: block; }

@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
-import { BarChart3, ChevronLeft, ChevronRight, RotateCcw, Sparkles, X } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { BarChart3, ChevronLeft, ChevronRight, HelpCircle, Moon, RotateCcw, Sparkles, SunMedium, X } from 'lucide-react'
 import { GameBoard } from './components/GameBoard'
 import puzzleData from './data/puzzles.json'
 import generatedPuzzleData from './data/generated-puzzles.json'
@@ -30,10 +30,22 @@ function getSeenTutorial() {
   }
 }
 
+type ThemeMode = 'system' | 'light' | 'dark'
+
+function getThemeMode(): ThemeMode {
+  try {
+    const stored = localStorage.getItem('zvenegram-theme')
+    return stored === 'light' || stored === 'dark' ? stored : 'system'
+  } catch {
+    return 'system'
+  }
+}
+
 function App() {
   const [showStats, setShowStats] = useState(false)
   const [showDebug, setShowDebug] = useState(false)
   const [showTutorial, setShowTutorial] = useState(() => !getSeenTutorial())
+  const [themeMode, setThemeMode] = useState<ThemeMode>(getThemeMode)
   const [stats, setStats] = useState<GameStats>(getStats)
   const recordFinish = useCallback((seconds: number) => setStats((current) => {
     const next = {
@@ -46,6 +58,11 @@ function App() {
     return next
   }), [])
   const game = useGame(puzzles, recordFinish)
+  const themeLabel = useMemo(() => {
+    if (themeMode === 'dark') return 'Mörkt läge'
+    if (themeMode === 'light') return 'Ljust läge'
+    return 'Systemläge'
+  }, [themeMode])
 
   const dismissTutorial = useCallback(() => {
     setShowTutorial(false)
@@ -53,6 +70,27 @@ function App() {
       localStorage.setItem('zvenegram-seen-tutorial', 'true')
     } catch {}
   }, [])
+
+  const cycleTheme = useCallback(() => {
+    setThemeMode((current) => {
+      const next = current === 'system' ? 'dark' : current === 'dark' ? 'light' : 'system'
+      try {
+        localStorage.setItem('zvenegram-theme', next)
+      } catch {}
+      return next
+    })
+  }, [])
+
+  useEffect(() => {
+    const root = document.documentElement
+    if (themeMode === 'system') {
+      root.removeAttribute('data-theme')
+      root.classList.remove('theme-dark')
+      return
+    }
+    root.dataset.theme = themeMode
+    root.classList.toggle('theme-dark', themeMode === 'dark')
+  }, [themeMode])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -66,7 +104,11 @@ function App() {
   return <main className="app-shell">
     <header className="topbar">
       <div className="brand"><span>Z</span>VENEGRAM</div>
-      <button className="icon-button" onClick={() => setShowStats(true)} aria-label="Visa statistik"><BarChart3 size={22} /></button>
+      <div className="topbar-actions">
+        <button className="icon-button" onClick={() => setShowTutorial(true)} aria-label="Visa guide"><HelpCircle size={22} /></button>
+        <button className="icon-button" onClick={cycleTheme} aria-label={themeLabel}>{themeMode === 'dark' ? <Moon size={22} /> : themeMode === 'light' ? <SunMedium size={22} /> : <SunMedium size={22} />}</button>
+        <button className="icon-button" onClick={() => setShowStats(true)} aria-label="Visa statistik"><BarChart3 size={22} /></button>
+      </div>
     </header>
 
     <section className="game-card">
