@@ -130,10 +130,7 @@ function App() {
         <p className="eyebrow">Så spelar du</p>
         <h2>Hitta orden i brädet</h2>
         <div className="tutorial-copy">
-          <p>Dra eller klicka dig genom bokstäverna för att bygga ett ord.</p>
-          <p>Ord måste gå i rätt riktning och får bara följa linjer som hör till ett möjligt ord.</p>
-          <p>När ett ord är klart visas det kort på brädet innan cirklarna försvinner.</p>
-          <p>Längst upp hittar du bläddring mellan pussel och nere i debug kan du se facit med <kbd>D</kbd>.</p>
+          <p>Dra eller klicka dig genom bokstäverna för att bygga ett ord. Alla ord har minst 4 bokstäver.</p>
         </div>
         <button className="primary" onClick={dismissTutorial}>Börja spela</button>
       </section>
