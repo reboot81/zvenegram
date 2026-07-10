@@ -22,9 +22,18 @@ function getStats(): GameStats {
   } catch { return emptyStats }
 }
 
+function getSeenTutorial() {
+  try {
+    return localStorage.getItem('zvenegram-seen-tutorial') === 'true'
+  } catch {
+    return true
+  }
+}
+
 function App() {
   const [showStats, setShowStats] = useState(false)
   const [showDebug, setShowDebug] = useState(false)
+  const [showTutorial, setShowTutorial] = useState(() => !getSeenTutorial())
   const [stats, setStats] = useState<GameStats>(getStats)
   const recordFinish = useCallback((seconds: number) => setStats((current) => {
     const next = {
@@ -37,6 +46,13 @@ function App() {
     return next
   }), [])
   const game = useGame(puzzles, recordFinish)
+
+  const dismissTutorial = useCallback(() => {
+    setShowTutorial(false)
+    try {
+      localStorage.setItem('zvenegram-seen-tutorial', 'true')
+    } catch {}
+  }, [])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -107,6 +123,21 @@ function App() {
         <div><strong>{stats.gamesSolved ? formatTime(Math.round(stats.totalTime / stats.gamesSolved)) : '–'}</strong><span>Snittid</span></div></div>
     </section></div>}
     <footer className="app-footer">Zvenegram · version 1.0.0</footer>
+
+    {showTutorial && <div className="modal-backdrop" onClick={dismissTutorial}>
+      <section className="modal tutorial-modal" onClick={(event) => event.stopPropagation()}>
+        <button className="modal-close" onClick={dismissTutorial} aria-label="Stäng guide"><X /></button>
+        <p className="eyebrow">Så spelar du</p>
+        <h2>Hitta orden i brädet</h2>
+        <div className="tutorial-copy">
+          <p>Dra eller klicka dig genom bokstäverna för att bygga ett ord.</p>
+          <p>Ord måste gå i rätt riktning och får bara följa linjer som hör till ett möjligt ord.</p>
+          <p>När ett ord är klart visas det kort på brädet innan cirklarna försvinner.</p>
+          <p>Längst upp hittar du bläddring mellan pussel och nere i debug kan du se facit med <kbd>D</kbd>.</p>
+        </div>
+        <button className="primary" onClick={dismissTutorial}>Börja spela</button>
+      </section>
+    </div>}
   </main>
 }
 
