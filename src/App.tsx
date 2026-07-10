@@ -56,7 +56,7 @@ function App() {
 
     <section className="game-card">
       <div className="game-meta">
-        <div><p className="eyebrow">Pussel {game.puzzleIndex + 1} av {puzzles.length}</p><h1>{game.puzzle.title}</h1></div>
+        <div><p className="eyebrow">Pussel {game.puzzleIndex + 1} av {puzzles.length}</p></div>
         <div className="timer" aria-label={`Tid ${formatTime(game.seconds)}`}><span>TID</span>{formatTime(game.seconds)}</div>
       </div>
       <div className="progress-row">

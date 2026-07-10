@@ -14,7 +14,11 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
   const puzzle = puzzles[puzzleIndex]
   const longestLength = Math.max(...puzzle.words.map(({ word }) => [...word].length))
   const remainingWords = useMemo(() => puzzle.words.filter(({ word }) => !solved.includes(word)), [puzzle, solved])
-  const activeNodeIds = useMemo(() => new Set(remainingWords.flatMap(({ path }) => path)), [remainingWords])
+  const activeNodeIds = useMemo(() => {
+    const ids = new Set(remainingWords.flatMap(({ path }) => path))
+    if (remainingWords.length && ids.size === 0) return new Set(puzzle.nodes.map(({ id }) => id))
+    return ids
+  }, [puzzle.nodes, remainingWords])
   const boardEdges = useMemo(() => getBoardEdges(puzzle), [puzzle])
   const visibleEdges = useMemo(() => boardEdges.filter(([a, b]) => activeNodeIds.has(a) && activeNodeIds.has(b)), [activeNodeIds, boardEdges])
   const gridNodes = useMemo(() => getGridNodes(puzzle), [puzzle])
