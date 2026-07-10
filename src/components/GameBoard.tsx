@@ -33,8 +33,8 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, nodesById, a
 
   return <div className="board" onPointerMove={handleMove} onPointerUp={() => {
     if (dragMoved.current) {
-      submitSelection()
       setSelection([])
+      submitSelection()
     }
     endDrag()
   }} onPointerCancel={() => { setSelection([]); endDrag() }} onLostPointerCapture={endDrag}>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { extendSelection, findMatchingWord, getBoardEdges, getGridNodes } from '../engine/puzzle'
 import type { Puzzle } from '../types'
 
@@ -37,6 +37,10 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
     return () => window.clearTimeout(timeout)
   }, [featuredWord])
 
+  useLayoutEffect(() => {
+    setSelection([])
+  }, [solved.length])
+
   const submitSelection = useCallback(() => {
     if (!selection.length) return
     const match = findMatchingWord(remainingWords, selection)
@@ -45,7 +49,6 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
       setSelection([])
       return
     }
-    setSelection([])
     const nextSolved = [...solved, match.word]
     setSolved(nextSolved)
     if ([...match.word].length === longestLength) {
