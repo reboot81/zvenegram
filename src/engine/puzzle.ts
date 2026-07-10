@@ -24,8 +24,7 @@ export function getBoardEdges(puzzle: Puzzle): Edge[] {
 }
 
 export function pathsMatch(path: string[], selection: string[]) {
-  const selected = selection.join('|')
-  return path.join('|') === selected || [...path].reverse().join('|') === selected
+  return path.join('|') === selection.join('|')
 }
 
 export function findMatchingWord(words: PuzzleWord[], selection: string[]) {
