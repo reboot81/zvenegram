@@ -85,11 +85,9 @@ function App() {
     const root = document.documentElement
     if (themeMode === 'system') {
       root.removeAttribute('data-theme')
-      root.classList.remove('theme-dark')
       return
     }
     root.dataset.theme = themeMode
-    root.classList.toggle('theme-dark', themeMode === 'dark')
   }, [themeMode])
 
   useEffect(() => {
@@ -101,12 +99,22 @@ function App() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
 
+  useEffect(() => {
+    if (!showTutorial) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      dismissTutorial()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [dismissTutorial, showTutorial])
+
   return <main className="app-shell">
     <header className="topbar">
-      <div className="brand"><span>Z</span>VENEGRAM</div>
+      <div className="brand"><span>S</span>VANAGRAM</div>
       <div className="topbar-actions">
         <button className="icon-button" onClick={() => setShowTutorial(true)} aria-label="Visa guide"><HelpCircle size={22} /></button>
-        <button className="icon-button" onClick={cycleTheme} aria-label={themeLabel}>{themeMode === 'dark' ? <Moon size={22} /> : themeMode === 'light' ? <SunMedium size={22} /> : <SunMedium size={22} />}</button>
+        <button className="icon-button" onClick={cycleTheme} aria-label={themeLabel}>{themeMode === 'dark' ? <Moon size={22} /> : <SunMedium size={22} />}</button>
         <button className="icon-button" onClick={() => setShowStats(true)} aria-label="Visa statistik"><BarChart3 size={22} /></button>
       </div>
     </header>
@@ -164,12 +172,12 @@ function App() {
         <div><strong>{stats.bestTime === null ? '–' : formatTime(stats.bestTime)}</strong><span>Bästa tid</span></div>
         <div><strong>{stats.gamesSolved ? formatTime(Math.round(stats.totalTime / stats.gamesSolved)) : '–'}</strong><span>Snittid</span></div></div>
     </section></div>}
-    <footer className="app-footer">Zvenegram · version 1.0.0</footer>
+    <footer className="app-footer">Svanagram · version 1.0.0</footer>
 
     {showTutorial && <div className="modal-backdrop" onClick={dismissTutorial}>
       <section className="modal tutorial-modal" onClick={(event) => event.stopPropagation()}>
         <button className="modal-close" onClick={dismissTutorial} aria-label="Stäng guide"><X /></button>
-        <p className="eyebrow">Så spelar du</p>
+        <p className="eyebrow">Så spelar du Svanagram</p>
         <h2>Hitta orden i brädet</h2>
         <div className="tutorial-copy">
           <p>Dra eller klicka dig genom bokstäverna för att bygga ett ord. Alla ord har minst 4 bokstäver.</p>
