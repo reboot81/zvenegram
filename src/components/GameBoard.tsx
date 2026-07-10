@@ -50,7 +50,7 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, recentSolved
     {nodes.map((node) => {
       const active = activeNodeIds.has(node.id)
       const selectedIndex = selection.indexOf(node.id)
-      const recentlySolved = recentSolvedPath.includes(node.id)
+      const recentlySolved = active && recentSolvedPath.includes(node.id)
       return <button key={node.id} data-node-id={node.id} disabled={!active}
         className={`letter-node ${active ? '' : 'gone'} ${selectedIndex >= 0 ? 'selected' : ''} ${recentlySolved ? 'recently-solved' : ''}`}
         style={{ left: `${node.x}%`, top: `${node.y}%` }} aria-label={`Bokstaven ${node.letter}`}

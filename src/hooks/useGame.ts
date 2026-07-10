@@ -83,6 +83,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
   const reset = useCallback((index = puzzleIndex) => {
     setPuzzleIndex(index)
     setSolved([]); setSelection([]); setSeconds(0); setStarted(false); setFinished(false)
+    setRecentSolvedPath([])
     setFeaturedWord(null); setMessage('')
   }, [puzzleIndex])
 
