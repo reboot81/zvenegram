@@ -9,6 +9,7 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
   const [seconds, setSeconds] = useState(0)
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
+  const [showFinishScreen, setShowFinishScreen] = useState(false)
   const [featuredWord, setFeaturedWord] = useState<string | null>(null)
   const [message, setMessage] = useState('')
   const [recentSolvedPath, setRecentSolvedPath] = useState<string[]>([])
@@ -67,7 +68,10 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
     if (nextSolved.length === puzzle.words.length) {
       setFinished(true)
       setMessage('Alla ord hittade!')
-      onFinish(seconds)
+      window.setTimeout(() => {
+        setShowFinishScreen(true)
+        onFinish(seconds)
+      }, 2000)
     }
   }, [longestLength, onFinish, puzzle.words.length, remainingWords, seconds, selection, solved])
 
@@ -83,13 +87,13 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
 
   const reset = useCallback((index = puzzleIndex) => {
     setPuzzleIndex(index)
-    setSolved([]); setSelection([]); setSeconds(0); setStarted(false); setFinished(false)
+    setSolved([]); setSelection([]); setSeconds(0); setStarted(false); setFinished(false); setShowFinishScreen(false)
     setRecentSolvedPath([])
     setFeaturedWord(null); setMessage('')
   }, [puzzleIndex])
 
   return {
-    puzzle, puzzleIndex, solved, selection, seconds, finished, featuredWord, message,
+    puzzle, puzzleIndex, solved, selection, seconds, finished, showFinishScreen, featuredWord, message,
     recentSolvedPath,
     activeNodeIds, visibleEdges, gridNodes, nodesById, selectionWord,
     addNode, submitSelection, setSelection, reset,

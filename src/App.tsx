@@ -150,7 +150,7 @@ function App() {
       {game.puzzle.words.map(({ word }) => <code key={word} className={game.solved.includes(word) ? 'solved' : ''}>{word}</code>)}
     </div></aside>}
 
-    {game.finished && <div className="modal-backdrop"><section className="modal finish-modal">
+    {game.showFinishScreen && <div className="modal-backdrop"><section className="modal finish-modal">
       <div className="celebration"><Sparkles /></div><p className="eyebrow">Pusslet löst</p><h2>Snyggt jobbat!</h2>
       {game.featuredWord && <div className="finish-longest"><Sparkles size={18} /><span>Längsta ordet</span><strong>{game.featuredWord}</strong></div>}
       <div className="final-time"><span>Din tid</span>{formatTime(game.seconds)}</div>
