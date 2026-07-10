@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { BarChart3, RotateCcw, Sparkles, X } from 'lucide-react'
 import { GameBoard } from './components/GameBoard'
 import puzzleData from './data/puzzles.json'
@@ -24,6 +24,7 @@ function getStats(): GameStats {
 
 function App() {
   const [showStats, setShowStats] = useState(false)
+  const [showDebug, setShowDebug] = useState(false)
   const [stats, setStats] = useState<GameStats>(getStats)
   const recordFinish = useCallback((seconds: number) => setStats((current) => {
     const next = {
@@ -36,6 +37,16 @@ function App() {
     return next
   }), [])
   const game = useGame(puzzles, recordFinish)
+
+  useEffect(() => {
+    if (!import.meta.env.DEV) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() !== 'd' || event.repeat || event.metaKey || event.ctrlKey || event.altKey) return
+      setShowDebug((current) => !current)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   return <main className="app-shell">
     <header className="topbar">
@@ -70,7 +81,7 @@ function App() {
       <button className="reset" onClick={() => game.reset()}><RotateCcw size={16} /> Börja om</button>
     </section>
 
-    {import.meta.env.DEV && <aside className="debug-words"><span>Debug · ord i pusslet</span><div>
+    {import.meta.env.DEV && showDebug && <aside className="debug-words"><span>Debug · ord i pusslet</span><div>
       {game.puzzle.words.map(({ word }) => <code key={word} className={game.solved.includes(word) ? 'solved' : ''}>{word}</code>)}
     </div></aside>}
 
