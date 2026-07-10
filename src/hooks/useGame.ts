@@ -52,8 +52,9 @@ export function useGame(puzzles: Puzzle[], onFinish: (seconds: number) => void) 
     if (!selection.length) return
     const match = findMatchingWord(remainingWords, selection)
     if (!match) {
-      setMessage('Inte ett av orden – prova igen')
       setSelection([])
+      if (selection.length >= 4) setMessage('Inte ett av orden – prova igen')
+      else setMessage('')
       return
     }
     setRecentSolvedPath(match.path)
