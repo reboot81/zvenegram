@@ -36,10 +36,25 @@ button { font: inherit; }
 
 .game-card { max-width: 680px; margin: auto; background: var(--paper); border: 1px solid rgba(44, 67, 52, .1); box-shadow: var(--shadow); border-radius: 28px; padding: 28px; overflow: hidden; }
 .game-meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.puzzle-nav { display: flex; align-items: center; gap: 8px; }
 .eyebrow { margin: 0 0 4px; color: var(--accent); font-weight: 700; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
 h1, h2 { font-family: 'Fraunces', Georgia, serif; margin: 0; line-height: 1.05; }
 h1 { font-size: clamp(28px, 6vw, 38px); }
 h2 { font-size: 32px; }
+.puzzle-step {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(44, 67, 52, .16);
+  border-radius: 999px;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+}
+.puzzle-step:hover { background: rgba(220, 95, 56, .08); border-color: rgba(220, 95, 56, .28); }
+.puzzle-step:active { transform: translateY(1px); }
 .timer { font-variant-numeric: tabular-nums; font-size: 22px; font-weight: 600; text-align: right; }
 .timer span { display: block; color: var(--muted); font-size: 9px; letter-spacing: .16em; }
 .progress-row { position: relative; display: flex; justify-content: space-between; margin-top: 24px; padding-bottom: 12px; color: var(--muted); font-size: 12px; font-weight: 600; }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { BarChart3, RotateCcw, Sparkles, X } from 'lucide-react'
+import { BarChart3, ChevronLeft, ChevronRight, RotateCcw, Sparkles, X } from 'lucide-react'
 import { GameBoard } from './components/GameBoard'
 import puzzleData from './data/puzzles.json'
 import generatedPuzzleData from './data/generated-puzzles.json'
@@ -56,7 +56,15 @@ function App() {
 
     <section className="game-card">
       <div className="game-meta">
-        <div><p className="eyebrow">Pussel {game.puzzleIndex + 1} av {puzzles.length}</p></div>
+        <div className="puzzle-nav">
+          <button className="puzzle-step" onClick={() => game.reset((game.puzzleIndex - 1 + puzzles.length) % puzzles.length)} aria-label="Föregående pussel">
+            <ChevronLeft size={16} />
+          </button>
+          <p className="eyebrow">Pussel {game.puzzleIndex + 1} av {puzzles.length}</p>
+          <button className="puzzle-step" onClick={() => game.reset((game.puzzleIndex + 1) % puzzles.length)} aria-label="Nästa pussel">
+            <ChevronRight size={16} />
+          </button>
+        </div>
         <div className="timer" aria-label={`Tid ${formatTime(game.seconds)}`}><span>TID</span>{formatTime(game.seconds)}</div>
       </div>
       <div className="progress-row">
