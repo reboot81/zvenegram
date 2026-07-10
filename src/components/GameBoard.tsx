@@ -42,10 +42,7 @@ export function GameBoard({ nodes, edges, activeNodeIds, selection, recentSolved
   }
 
   return <div className="board" onPointerMove={handleMove} onPointerUp={() => {
-    if (dragMoved.current) {
-      setSelection([])
-      submitSelection()
-    }
+    if (dragMoved.current) submitSelection()
     endDrag()
   }} onPointerCancel={() => { setSelection([]); endDrag() }} onLostPointerCapture={endDrag}>
     <svg className="connections" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
